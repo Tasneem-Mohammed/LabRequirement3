@@ -1,0 +1,144 @@
+{
+    "info": {
+      "name": "Flask Todos API",
+      "description": "A simple Flask API",
+      "version": "1.0.0"
+    },
+    "paths": {
+      "/todos": {
+        "get": {
+          "summary": "Get all todos",
+          "description": "Retrieves a list of all tasks",
+          "responses": {
+            "200": {
+              "description": "A list of tasks",
+              "content": {
+                "application/json": {
+                  "example": [
+                    {
+                      "id": 1,
+                      "task": "Go shopping",
+                      "completed_task": false
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "post": {
+          "summary": "Create a new todo",
+          "description": "Adds a new todo item.",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "task": "LabRequirement 3",
+                  "completed_task": true
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Task created successfully.",
+              "content": {
+                "application/json": {
+                  "example": {
+                    "id": 2,
+                    "task": "Math Quiz",
+                    "completed_task": false
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/todos/{todo_id}": {
+        "put": {
+          "summary": "Update a todo",
+          "description": "Updates a todo item by its ID.",
+          "parameters": [
+            {
+              "name": "todo_id",
+              "in": "path",
+              "required": true,
+              "description": "ID of the todo to update",
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "task": "Updated Todo",
+                  "completed_task": true
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Task updated successfully.",
+              "content": {
+                "application/json": {
+                  "example": {
+                    "id": 1,
+                    "task": "SWE Quiz",
+                    "completed_task": true
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Task not found.",
+              "content": {
+                "application/json": {
+                  "example": {
+                    "error": "Task not found"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "delete": {
+          "summary": "Delete a todo",
+          "description": "Deletes a todo item by its ID.",
+          "parameters": [
+            {
+              "name": "todo_id",
+              "in": "path",
+              "required": true,
+              "description": "ID of the todo to delete",
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "Task deleted successfully.",
+              "content": {
+                "application/json": {}
+              }
+            },
+            "404": {
+              "description": "Task not found.",
+              "content": {
+                "application/json": {
+                  "example": {
+                    "error": "Task not found"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  
